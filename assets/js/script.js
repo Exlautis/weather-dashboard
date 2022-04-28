@@ -46,7 +46,7 @@ $(document).ready(function() {
             statusCode: {
                 404: function() {
                     $('#current-forecast').hide();
-                    $('#five-day-forcast-container').hide();
+                    $('#five-day-forecast-container').hide();
                     $('#error-div').show();
                 }
             }
@@ -117,7 +117,7 @@ $(document).ready(function() {
                     var forecastDate = new Date(forecastResultsDate).toLocaleDateString('en-US');
                     var forecastTemp = forecastResults.list[i].main.temp;
                     var forecastHumidity = forecastResults.list[i].main.humidity;
-                    var forecastIcon = forecastResults.list[i]. weather[0].icon;
+                    var forecastIcon = forecastResults.list[i].weather[0].icon;
 
                     forecastObj['list'] = {};
                     forecastObj['list']['date'] = forecastDate;
@@ -130,14 +130,14 @@ $(document).ready(function() {
                 
                 for (var i = 0; i < 5; i++) {
                     var forecastArrDate = forecastArr[i].list.date;
-                    var forecastIconUrl = getWeatherIcon + forecastArr[i].list.icon + '.png';
-                    var forecastArrTemp = Math.floor(forecastArr[i].list,temp);
+                    var forecastIconURL = getWeatherIcon + forecastArr[i].list.icon + '.png';
+                    var forecastArrTemp = Math.floor(forecastArr[i].list.temp);
                     var forecastArrHumidity = forecastArr[i].list.humidity;
 
                     $('#date-' + (i + 1)).text(forecastArrDate);
-                    $('#weather-image-' + (i + 1)).attr('src', forecastIconUrl);
-                    $('#temp-' + (i + 1)).text('Temp: ' + forecastArrTemp + ' °F');
-                    $('#humidity-' + (i + 1)).text('humidity' + forecastArrHumidity + '%');
+                    $('#weather-image-' + (i + 1)).attr('src', forecastIconURL);
+                    $('#temp-' + (i + 1)).text('Temp: ' + Math.floor(forecastArrTemp) + ' °F');
+                    $('#humidity-' + (i + 1)).text('Humidity' + forecastArrHumidity + '%');
 
                 }
                 $('#weather-container').show();
@@ -238,7 +238,7 @@ $(document).ready(function() {
     }
 
     function clickHistory() {
-        $('#search-history').on('click', li, function() {
+        $('#search-history').on('click', 'li', function() {
             var cityNameHistory = $(this).text();
             getWeather(cityNameHistory);
         });
